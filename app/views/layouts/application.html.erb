@@ -13,9 +13,43 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
+    <style>
+    .waiting_on {
+      background-color: lightgoldenrodyellow;
+    }
+
+    .received {
+      background-color: lightgreen;
+    }
+    </style>
+
   </head>
 
   <body>
+  <nav>
+    <% if session.fetch(:user_id).present? %>
+      <a href="/">Your todo list</a>
+      |
+      <a href="/edit_user_profile">Edit profile</a>
+      |
+      <a href="/user_sign_out">Sign out</a>
+    <%else%>
+      <a href="/user_sign_in">Sign in</a>
+      |
+      <a href="/user_sign_up">Sign up</a>
+    <%end%>
+
+  </nav>
+   <%if notice.present?%>
+    <div>
+    <p><%= notice%></p>
+    </div>
+    <%end%>
+    <%if alert.present?%>
+    <div>
+    <p><%= alert%></p>
+    </div>
+    <%end%>
     <%= yield %>
   </body>
 </html>
